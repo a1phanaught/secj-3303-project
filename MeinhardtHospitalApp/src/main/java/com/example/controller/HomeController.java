@@ -13,8 +13,7 @@ public class HomeController {
 	@GetMapping("/home")
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView("home");
-		modelAndView.addObject("message", "Welcome to Meinhardt Hospital Website!");
+		modelAndView.addObject("message", "Welcome to the Spring Web App!");
 		return modelAndView;
 	}
-
 }

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Meinhardt Hospital Home</title>
+	<title>Home Page</title>
 </head>
 <body>
-	<h2>Meinhardt Hospital homepage. Message : ${message}</h2>
+	<h2>Hello from home. Message : ${message}</h2>
 </body>
 </html>
