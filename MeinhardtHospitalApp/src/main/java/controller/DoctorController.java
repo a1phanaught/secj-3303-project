@@ -10,32 +10,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import entity.Patient;
-import service.PatientDao_usingHibernate;
+import entity.Doctor;
+import service.DoctorDao;
 
 @Controller
-@RequestMapping("/patient")
-public class PatientController {
-	@Autowired // spring dependency injection
-	private PatientDao_usingHibernate cDao_usingHibernate;
+@RequestMapping("/doctor")
+public class DoctorController {
+	@Autowired
+	private DoctorDao cDao;
 	
 	@RequestMapping("/getall")
 	@ResponseBody()
 	public String getall() {
-		List<Patient> clist = cDao_usingHibernate.findAll();
+		List<Doctor> clist = cDao.findAll();
 		return "this is getall" + clist.toString();
 	}
 	
-	@GetMapping("/register")
-	public ModelAndView registration() {
-		return new ModelAndView("patient-registration");
+	@RequestMapping("/get1")
+	@ResponseBody()
+	public String getDoctor() {
+		Doctor clist = cDao.getDoctorById(1);
+		return "this is getall" + clist.toString();
 	}
-	
-	@PostMapping("/register")
-    public String registerPatient(@ModelAttribute("patient") Patient patient) {
-        cDao_usingHibernate.savePatient(patient);
-        return "redirect:/patient/getall";
-    }
 }

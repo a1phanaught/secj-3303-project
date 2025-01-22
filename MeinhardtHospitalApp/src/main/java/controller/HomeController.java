@@ -30,7 +30,7 @@ public class HomeController {
 	@GetMapping("/home")
 	public ModelAndView homepage() {
 		ModelAndView modelandview = new ModelAndView("home");
-		modelandview.addObject("message", "Welcome to Meinhardt Hospital homepage");
+		modelandview.addObject("message", "Meinhardt Hospital homepage");
 		return modelandview;
 	}
 }

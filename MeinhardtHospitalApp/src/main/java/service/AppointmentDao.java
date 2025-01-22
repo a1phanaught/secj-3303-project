@@ -5,23 +5,24 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import entity.Patient;
+import entity.Appointment;
+
 import java.util.List;
 
 @Service
-public class PatientDao_usingHibernate {
+public class AppointmentDao {
 	@Autowired // spring dependency injection
 	private SessionFactory sessionFactory;
 	
 	@Transactional
-	public List<Patient> findAll() {
+	public List<Appointment> findAll() {
 		Session currentSession = sessionFactory.getCurrentSession();
-		return currentSession.createQuery("from Patient").getResultList();
+		return currentSession.createQuery("from Appointment").getResultList();
 	}
 	
 	@Transactional
-    public void savePatient(Patient patient) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.saveOrUpdate(patient);
-    }
+	public Appointment getAppointmentById(int id) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.get(Appointment.class, id);
+	}
 }
