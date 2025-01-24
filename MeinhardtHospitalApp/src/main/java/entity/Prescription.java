@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+<<<<<<< HEAD
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+=======
+>>>>>>> da5411df0cce6f67d820895bf388f0614138f216
 import java.time.LocalDate;
 
 @Entity
@@ -26,11 +29,17 @@ public class Prescription {
 	private int dosage;
 
 	@Column(name = "registerDate")
+<<<<<<< HEAD
 	 @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate registerDate;
 
 	@Column(name = "expiryDate")
 	 @DateTimeFormat(pattern = "yyyy-MM-dd")
+=======
+	private LocalDate registerDate;
+
+	@Column(name = "expiryDate")
+>>>>>>> da5411df0cce6f67d820895bf388f0614138f216
 	private LocalDate expiryDate;
 
 	@Column(name = "quantity")
