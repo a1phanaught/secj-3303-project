@@ -58,14 +58,20 @@ public class PrescriptionController {
 	}
 
 	
-	@GetMapping("/update")
-	public String updatePrescription(@PathVariable int id, @ModelAttribute("prescription") Prescription newPrescription) {
+	@GetMapping("/update/{id}")
+	public ModelAndView updateForm(@PathVariable int id, @ModelAttribute("prescription") Prescription newPrescription) {
+		ModelAndView modelView = new ModelAndView("prescription-Update");
+		Prescription prescription = cDao.getPrescriptionById(id);
+		modelView.addObject("prescriptionObj", prescription);
+		return modelView;
+	}
+	/*public String updatePrescription(@PathVariable int id, @ModelAttribute("prescription") Prescription newPrescription) {
 	    Prescription updatedPrescription = cDao.updatePrescription(id, newPrescription);
 	    if (updatedPrescription != null) {
 	        return "redirect:/prescription/getall";
 	    }
 		return null; 
-	}
+	}*/
 
 	@RequestMapping ("/get1")
 	@ResponseBody()
