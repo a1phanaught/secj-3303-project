@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import entity.Patient;
 import service.PatientDao_usingHibernate;
@@ -26,4 +27,15 @@ public class PatientController {
 		List<Patient> clist = cDao_usingHibernate.findAll();
 		return "this is getall" + clist.toString();
 	}
+	
+	@GetMapping("/register")
+	public ModelAndView registration() {
+		return new ModelAndView("patient-registration");
+	}
+	
+	@PostMapping("/register")
+    public String registerPatient(@ModelAttribute("patient") Patient patient) {
+        cDao_usingHibernate.savePatient(patient);
+        return "redirect:/patient/getall";
+    }
 }

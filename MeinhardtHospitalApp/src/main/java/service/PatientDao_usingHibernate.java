@@ -18,4 +18,10 @@ public class PatientDao_usingHibernate {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return currentSession.createQuery("from Patient").getResultList();
 	}
+	
+	@Transactional
+    public void savePatient(Patient patient) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(patient);
+    }
 }
