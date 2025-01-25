@@ -90,7 +90,7 @@ public class AppointmentController {
 
 	    try {
 	        cDao.saveAppointment(appointment);
-	        return "redirect:/appointment/getall";
+	        return "redirect:/doctor/dashboard";
 	    } catch (Exception e) {
 	        model.addAttribute("error", "An error occurred while creating the appointment. Please try again.");
 	        return "appointment-create";

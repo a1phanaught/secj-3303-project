@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import entity.Appointment;
 import entity.Doctor;
 import entity.Patient;
 import java.util.List;
@@ -41,5 +42,13 @@ public class PatientDao_usingHibernate {
 	public Patient getPatientById(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return currentSession.get(Patient.class, id);
+	}
+	
+	@Transactional
+	public List<Appointment> findAppointmentsByPatientId(int patientId) {
+	    Session currentSession = sessionFactory.getCurrentSession();
+	    return currentSession.createQuery("from Appointment where patient.id = :patientId", Appointment.class)
+	                         .setParameter("patientId", patientId)
+	                         .getResultList();
 	}
 }

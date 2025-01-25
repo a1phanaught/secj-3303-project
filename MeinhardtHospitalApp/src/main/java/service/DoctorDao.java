@@ -6,6 +6,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import entity.Appointment;
 import entity.Doctor;
 import java.util.List;
 
@@ -39,5 +41,13 @@ public class DoctorDao {
 	    query.setParameter("email", email);
 	    query.setParameter("password", password);
 	    return query.uniqueResult();
+	}
+	
+	@Transactional
+	public List<Appointment> findAppointmentsByDoctorId(int doctorId) {
+	    Session currentSession = sessionFactory.getCurrentSession();
+	    return currentSession.createQuery("from Appointment where doctor.id = :doctorId", Appointment.class)
+	                         .setParameter("doctorId", doctorId)
+	                         .getResultList();
 	}
 }

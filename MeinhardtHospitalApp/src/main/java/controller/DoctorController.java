@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import entity.Appointment;
 import entity.Doctor;
 import service.DoctorDao;
 
@@ -46,7 +47,7 @@ public class DoctorController {
     @PostMapping("/register")
     public String registerDoctor(@ModelAttribute("doctor") Doctor doctor) {
         cDao.saveDoctor(doctor);
-        return "redirect:/doctor/getall";
+        return "redirect:/doctor/login";
     }
     
     @GetMapping("/login")
@@ -80,5 +81,17 @@ public class DoctorController {
             model.addAttribute("error", "Invalid email or password");
             return "doctor-login"; // Redirect back to the login page
         }
+    }
+    
+    @GetMapping("/dashboard")
+    public String showDashboard(HttpSession session, Model model) {
+        Doctor doctor = (Doctor) session.getAttribute("doctor");
+        if (doctor == null) {
+            return "redirect:/doctor/login";
+        }
+
+        List<Appointment> appointments = cDao.findAppointmentsByDoctorId(doctor.getId());
+        model.addAttribute("appointments", appointments);
+        return "doctor-dashboard";
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import entity.Appointment;
 import entity.Doctor;
 import entity.Patient;
 import service.PatientDao_usingHibernate;
@@ -40,7 +41,7 @@ public class PatientController {
 	@PostMapping("/register")
     public String registerPatient(@ModelAttribute("patient") Patient patient) {
         cDao_usingHibernate.savePatient(patient);
-        return "redirect:/patient/getall";
+        return "redirect:/patient/login";
     }
 	
 	@GetMapping("/login")
@@ -69,10 +70,22 @@ public class PatientController {
 	        session.invalidate(); // Invalidate the current session
 	        session = request.getSession(true); // Create a new session
 	        session.setAttribute("patient", patient); // Set the new attribute
-	        return "redirect:/patient/getall"; // Redirect to a dashboard or another page
+	        return "redirect:/patient/dashboard"; // Redirect to a dashboard or another page
 	    } else {
 	        model.addAttribute("error", "Invalid email or password");
 	        return "patient-login"; // Redirect back to the login page
 	    }
 	}
+	
+	@GetMapping("/dashboard")
+    public String showDashboard(HttpSession session, Model model) {
+        Patient patient = (Patient) session.getAttribute("doctor");
+        if (patient == null) {
+            return "redirect:/doctor/login";
+        }
+
+        List<Appointment> appointments = cDao_usingHibernate.findAppointmentsByPatientId(patient.getId());
+        model.addAttribute("appointments", appointments);
+        return "patient-dashboard";
+    }
 }
