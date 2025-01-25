@@ -38,4 +38,18 @@ public class PatientController {
         cDao_usingHibernate.savePatient(patient);
         return "redirect:/patient/getall";
     }
+	
+	@GetMapping("/login")
+	public ModelAndView login() {
+		return new ModelAndView("patient-login");
+	}
+	
+	@PostMapping("/login")
+    public String loginPatient(@ModelAttribute("patient") Patient patient) {
+        Patient currPatient = cDao_usingHibernate.getPatientByEmail(patient.getEmail());
+        if (patient.getPassword() == currPatient.getPassword()) 
+        	return "redirect:/patient/getall";
+        else
+        	return "redirect:/patient/login";
+    }
 }

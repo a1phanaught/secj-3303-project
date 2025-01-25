@@ -4,14 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Patient Registration</title>
 </head>
 <body>
 	<form method="post" action="${pageContext.request.contextPath}/patient/register">
         <p>Name:</p>
         <input type="text" name="name" required>
         <p>Email:</p>
-        <input type="text" name="email">
+        <input type="text" name="email" required>
+        <p>Password:</p>
+        <input type="password" name="password" required>
         <p>Address:</p>
         <input type="text" name="address" required>
         <p>Phone Num:</p>

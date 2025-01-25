@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import entity.Doctor;
 import entity.Patient;
 import java.util.List;
 
@@ -24,4 +26,10 @@ public class PatientDao_usingHibernate {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(patient);
     }
+	
+	@Transactional
+	public Patient getPatientByEmail(String email) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.get(Patient.class, email);
+	}
 }

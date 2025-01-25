@@ -22,6 +22,8 @@ public class Patient {
 	private String phoneNum;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "password")
+	private String password;
 	
 	@Override
 	public String toString() {
@@ -32,13 +34,14 @@ public class Patient {
 	public Patient() {
 	}
 
-	public Patient(int id, String name, String address, String phoneNum, String email) {
+	public Patient(int id, String name, String address, String phoneNum, String email, String password) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.phoneNum = phoneNum;
 		this.email = email;
+		this.password = password;
 	}
 
 	public int getId() {
@@ -79,6 +82,14 @@ public class Patient {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
