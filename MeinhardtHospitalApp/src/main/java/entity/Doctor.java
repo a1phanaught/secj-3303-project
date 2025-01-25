@@ -20,6 +20,9 @@ public class Doctor {
 
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "password")
+	private String password;
 
 	@Column(name = "address")
 	private String address;
@@ -36,11 +39,12 @@ public class Doctor {
 	public Doctor() {
 	}
 
-	public Doctor(int id, String name, String email, String address, String phoneNum) {
+	public Doctor(int id, String name, String email, String password, String address, String phoneNum) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.address = address;
 		this.phoneNum = phoneNum;
 	}
@@ -67,6 +71,14 @@ public class Doctor {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getAddress() {

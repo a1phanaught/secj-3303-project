@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2025 at 09:44 AM
+-- Generation Time: Jan 25, 2025 at 04:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -57,6 +57,7 @@ CREATE TABLE `doctor` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `address` varchar(500) NOT NULL,
   `phoneNum` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -70,17 +71,11 @@ CREATE TABLE `doctor` (
 CREATE TABLE `patient` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `address` varchar(500) NOT NULL,
   `phoneNum` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `patient`
---
-
-INSERT INTO `patient` (`id`, `name`, `email`, `address`, `phoneNum`) VALUES
-(1, 'Testname', 'Testemail', 'Testaddress testaddress', '019191919');
 
 -- --------------------------------------------------------
 
@@ -92,6 +87,7 @@ CREATE TABLE `pharmacist` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `address` varchar(500) NOT NULL,
   `phoneNum` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -167,19 +163,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pharmacist`
@@ -191,7 +187,7 @@ ALTER TABLE `pharmacist`
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
