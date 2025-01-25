@@ -32,7 +32,7 @@ public class PatientDao_usingHibernate {
 	@Transactional
 	public Patient getPatientByEmail(String email, String password) {
 		Session currentSession = sessionFactory.getCurrentSession();
-	    Query<Patient> query = currentSession.createQuery("from Doctor where email=:email and password=:password", Patient.class);
+	    Query<Patient> query = currentSession.createQuery("from Patient where email=:email and password=:password", Patient.class);
 	    query.setParameter("email", email);
 	    query.setParameter("password", password);
 	    return query.uniqueResult();

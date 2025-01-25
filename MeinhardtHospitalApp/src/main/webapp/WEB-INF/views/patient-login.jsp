@@ -8,6 +8,9 @@
 </head>
 <body>
 	<h1>Patient Login</h1>
+	<c:if test="${not empty error}">
+        <p style="color:red;">${error}</p>
+    </c:if>
 	<form method="post" action="${pageContext.request.contextPath}/patient/login">
         <p>Email:</p>
         <input type="text" name="email" required>

@@ -79,9 +79,9 @@ public class PatientController {
 	
 	@GetMapping("/dashboard")
     public String showDashboard(HttpSession session, Model model) {
-        Patient patient = (Patient) session.getAttribute("doctor");
+        Patient patient = (Patient) session.getAttribute("patient");
         if (patient == null) {
-            return "redirect:/doctor/login";
+            return "redirect:/patient/login";
         }
 
         List<Appointment> appointments = cDao_usingHibernate.findAppointmentsByPatientId(patient.getId());
