@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import entity.Appointment;
+import entity.Doctor;
 
 import java.util.List;
 
@@ -24,5 +25,11 @@ public class AppointmentDao {
 	public Appointment getAppointmentById(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return currentSession.get(Appointment.class, id);
+	}
+	
+	@Transactional
+	public void saveAppointment(Appointment appointment) {
+	    Session currentSession = sessionFactory.getCurrentSession();
+	    currentSession.saveOrUpdate(appointment);
 	}
 }

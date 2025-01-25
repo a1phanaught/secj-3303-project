@@ -2,6 +2,7 @@ package service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,17 @@ public class PatientDao_usingHibernate {
     }
 	
 	@Transactional
-	public Patient getPatientByEmail(String email) {
+	public Patient getPatientByEmail(String email, String password) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		return currentSession.get(Patient.class, email);
+	    Query<Patient> query = currentSession.createQuery("from Doctor where email=:email and password=:password", Patient.class);
+	    query.setParameter("email", email);
+	    query.setParameter("password", password);
+	    return query.uniqueResult();
+	}
+	
+	@Transactional
+	public Patient getPatientById(int id) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.get(Patient.class, id);
 	}
 }
