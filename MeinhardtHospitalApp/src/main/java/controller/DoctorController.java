@@ -76,7 +76,7 @@ public class DoctorController {
             session = request.getSession(true); // Create a new session
             session.setAttribute("doctor", doctor); // Set the new attribute
             model.addAttribute("doctor", doctor);
-            return "redirect:/doctor/getall"; // Redirect to a dashboard or another page
+            return "redirect:/doctor/dashboard"; // Redirect to a dashboard or another page
         } else {
             model.addAttribute("error", "Invalid email or password");
             return "doctor-login"; // Redirect back to the login page
@@ -93,5 +93,11 @@ public class DoctorController {
         List<Appointment> appointments = cDao.findAppointmentsByDoctorId(doctor.getId());
         model.addAttribute("appointments", appointments);
         return "doctor-dashboard";
+    }
+    
+    @PostMapping("/logout")
+    public String logoutDoctor(HttpSession session) {
+        session.invalidate(); // Invalidate the current session
+        return "redirect:/doctor/login"; // Redirect to the login page
     }
 }

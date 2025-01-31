@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Doctor Dashboard</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/dashboard.css">
+<script type="text/javascript">
+    function confirmDeletion(appointmentId) {
+        if (confirm("Are you sure you want to delete this appointment?")) {
+            document.getElementById('deleteForm-' + appointmentId).submit();
+        }
+    }
+</script>
 </head>
 <body>
     <c:choose>
@@ -19,6 +28,7 @@
                         <th>Patient Name</th>
                         <th>Date & Time</th>
                         <th>Description</th>
+                        <th>Actions</th>
                     </tr>
                     <c:forEach var="appointment" items="${appointments}">
                         <tr>
@@ -26,6 +36,16 @@
                             <td>${appointment.patient.name}</td>
                             <td>${appointment.datetime}</td>
                             <td>${appointment.description}</td>
+                            <td>
+                                <form id="deleteForm-${appointment.id}" method="post" action="${pageContext.request.contextPath}/appointment/delete" style="display:inline;">
+                                    <input type="hidden" name="appointment_id" value="${appointment.id}">
+                                    <input type="button" value="Delete" class="button delete-button" onclick="confirmDeletion(${appointment.id})">
+                                </form>
+                                <form method="get" action="${pageContext.request.contextPath}/appointment/edit" style="display:inline;">
+                                    <input type="hidden" name="appointment_id" value="${appointment.id}">
+                                    <input type="submit" value="Edit" class="button">
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -33,6 +53,10 @@
             <c:if test="${empty appointments}">
                 <p>No appointments found.</p>
             </c:if>
+            <a href="${pageContext.request.contextPath}/appointment/create">Create New Appointment</a>
+            <form method="post" action="${pageContext.request.contextPath}/doctor/logout" style="margin-top: 20px;">
+                <input type="submit" value="Logout" class="button logout-button">
+            </form>
         </c:when>
         <c:otherwise>
             <p>You must be logged in as a doctor to access this page.</p>

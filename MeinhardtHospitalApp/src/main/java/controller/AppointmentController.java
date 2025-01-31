@@ -96,4 +96,59 @@ public class AppointmentController {
 	        return "appointment-create";
 	    }
 	}
+	
+	@PostMapping("/delete")
+	public String deleteAppointment(@RequestParam("appointment_id") int appointmentId, Model model) {
+	    try {
+	        cDao.deleteAppointmentById(appointmentId);
+	        return "redirect:/doctor/dashboard";
+	    } catch (Exception e) {
+	        model.addAttribute("error", "An error occurred while deleting the appointment. Please try again.");
+	        return "doctor-dashboard";
+	    }
+	}
+	
+	@GetMapping("/edit")
+	public String showEditForm(@RequestParam("appointment_id") int appointmentId, Model model) {
+	    Appointment appointment = cDao.getAppointmentById(appointmentId);
+	    if (appointment == null) {
+	        model.addAttribute("error", "Appointment not found.");
+	        return "doctor-dashboard";
+	    }
+	    model.addAttribute("appointment", appointment);
+	    return "appointment-edit";
+	}
+
+	@PostMapping("/edit")
+	public String editAppointment(@RequestParam("appointment_id") int appointmentId,
+	                              @RequestParam("datetime") String datetime,
+	                              @RequestParam("description") String description,
+	                              Model model) {
+	    Appointment appointment = cDao.getAppointmentById(appointmentId);
+	    if (appointment == null) {
+	        model.addAttribute("error", "Appointment not found.");
+	        return "appointment-edit";
+	    }
+
+	    // Parse datetime
+	    LocalDateTime appointmentDateTime;
+	    try {
+	        appointmentDateTime = LocalDateTime.parse(datetime);
+	    } catch (Exception e) {
+	        model.addAttribute("error", "Invalid date format.");
+	        return "appointment-edit";
+	    }
+
+	    // Update appointment details
+	    appointment.setDatetime(appointmentDateTime);
+	    appointment.setDescription(description);
+
+	    try {
+	        cDao.saveAppointment(appointment);
+	        return "redirect:/doctor/dashboard";
+	    } catch (Exception e) {
+	        model.addAttribute("error", "An error occurred while updating the appointment. Please try again.");
+	        return "appointment-edit";
+	    }
+	}
 }

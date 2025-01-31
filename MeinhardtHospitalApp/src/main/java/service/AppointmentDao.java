@@ -32,4 +32,13 @@ public class AppointmentDao {
 	    Session currentSession = sessionFactory.getCurrentSession();
 	    currentSession.saveOrUpdate(appointment);
 	}
+	
+	@Transactional
+	public void deleteAppointmentById(int id) {
+	    Session currentSession = sessionFactory.getCurrentSession();
+	    Appointment appointment = currentSession.get(Appointment.class, id);
+	    if (appointment != null) {
+	        currentSession.delete(appointment);
+	    }
+	}
 }

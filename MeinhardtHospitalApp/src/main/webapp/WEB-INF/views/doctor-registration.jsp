@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Doctor Registration</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/form.css">
 </head>
 <body>
     <form method="post" action="${pageContext.request.contextPath}/doctor/register">

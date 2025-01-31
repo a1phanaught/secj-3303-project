@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Create New Appointment</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/form.css">
 </head>
 <body>
     <c:choose>
